@@ -1,0 +1,56 @@
+﻿@model RankingDetalheViewModel
+
+<div id="loader-container">
+    <div id="loader-bg"></div>
+    <div id="modal">
+        <a class="btn-fechar" title="Fechar">X</a>
+        <div class="header clearfix">
+            <img src="/Images/ico-avatar.png" alt="" class="fl" />
+            <h2 class="fl">@Model.Jogador</h2>
+            <div class="trofeu fr"><span>@Model.Posicao</span></div>
+        </div>
+        <div class="">
+            <table>
+                <thead>
+                    <tr>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+                        <th colspan="2">Resposta (correta)</th>
+                        <th colspan="2">Resposta (informada)</th>
+                        <th colspan="2">Pontos</th>
+                    </tr>
+                    <tr class="bloco-header">
+                        <td colspan="2" style="text-align: left !important;">Pergunta</td>
+                        <td class="bloco-border">Ranking</td>
+                        <td>Fortuna</td>
+                        <td class="bloco-border">Ranking</td>
+                        <td>Fortuna</td>
+                        <td class="bloco-border">Ranking</td>
+                        <td>Fortuna</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var pergunta in Model.Perguntas) {
+                        <tr>
+                            <td><img src="/Images/Jogo/@Model.JogoId/Baixa/@(pergunta.PerguntaId).jpg" alt="" class="fl" width="24" height="24" /></td>
+                            <td style="text-align: left !important;">@pergunta.PerguntaDescricao.Replace(", informe:", "")</td>
+                            <td class="bloco-border">@pergunta.RespostaCorretaRanking</td>
+                            <td>@pergunta.RespostaCorretaFortuna</td>
+                            <td class="bloco-border">@pergunta.RespostaInformadaRanking</td>
+                            <td>@pergunta.RespostaInformadaFortuna</td>
+                            <td class="bloco-border">@pergunta.PontoRanking</td>
+                            <td>@pergunta.PontoFortuna</td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="6" class="text-right">Total</td>
+                        <td class="bloco-border text-center">@Model.Perguntas.Sum(x => x.PontoRanking)</td>
+                        <td class="text-center">@Model.Perguntas.Sum(x => x.PontoFortuna)</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,34 @@
+﻿@model JogoViewModel
+
+@using System.Web.Optimization
+
+@{
+    ViewBag.Title = Model.Titulo;
+}
+
+<header>
+    <div class="container">
+        <img src="@Model.Logo" class="fl" alt="" width="48" height="48" />
+        <h2>@ViewBag.Title</h2>
+        @Html.Hidden("JogoIdentificacao", Model.Token)
+    </div>
+</header>
+
+<section id="content">
+    <div class="container">
+        <p class="descricao">@Model.Descricao</p>
+        @Html.Partial("_Premiacao", Model)
+        @Html.Partial("_Autenticacao", Model.Jogador)
+    </div>
+</section>
+
+@section PageScript
+{
+    @Scripts.Render("~/Scripts/aplicacao.js")
+}
+
+@section PageStyle
+{
+    @Styles.Render("~/Content/aplicacao.css")
+    @Styles.Render("~/Content/estilo/356a192b7913b04c54574d18c28d46e6395428ab.css")
+}

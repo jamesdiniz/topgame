@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TopGame.Web", "TopGame.Web\TopGame.Web.csproj", "{F7C9DA4B-052B-4F3A-84FA-7B4A95C724B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TopGame.Data", "TopGame.Data\TopGame.Data.csproj", "{09C2EA2E-32B1-4FAE-8B37-8B8B1888F5C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TopGame.Service", "TopGame.Service\TopGame.Service.csproj", "{28D7AFFA-3FF3-41E2-8F05-82EC5F6BD338}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TopGame.Core", "TopGame.Core\TopGame.Core.csproj", "{4A85C464-1210-4AD7-9569-3494646DD678}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Apps", "Apps", "{8F2761D2-F4FA-4B0A-8200-788118F0DE4D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TopGame.App.Bilionario", "Apps\TopGame.App.Bilionario\TopGame.App.Bilionario.csproj", "{AEDED553-DD50-4892-8EFC-AFB5F1B43823}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TopGame.Web.Framework", "TopGame.Web.Framework\TopGame.Web.Framework.csproj", "{5BD7B59A-915A-40E2-A332-83CE178F9336}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F7C9DA4B-052B-4F3A-84FA-7B4A95C724B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7C9DA4B-052B-4F3A-84FA-7B4A95C724B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7C9DA4B-052B-4F3A-84FA-7B4A95C724B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7C9DA4B-052B-4F3A-84FA-7B4A95C724B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09C2EA2E-32B1-4FAE-8B37-8B8B1888F5C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09C2EA2E-32B1-4FAE-8B37-8B8B1888F5C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09C2EA2E-32B1-4FAE-8B37-8B8B1888F5C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09C2EA2E-32B1-4FAE-8B37-8B8B1888F5C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28D7AFFA-3FF3-41E2-8F05-82EC5F6BD338}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28D7AFFA-3FF3-41E2-8F05-82EC5F6BD338}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28D7AFFA-3FF3-41E2-8F05-82EC5F6BD338}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28D7AFFA-3FF3-41E2-8F05-82EC5F6BD338}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A85C464-1210-4AD7-9569-3494646DD678}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A85C464-1210-4AD7-9569-3494646DD678}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A85C464-1210-4AD7-9569-3494646DD678}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A85C464-1210-4AD7-9569-3494646DD678}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEDED553-DD50-4892-8EFC-AFB5F1B43823}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEDED553-DD50-4892-8EFC-AFB5F1B43823}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEDED553-DD50-4892-8EFC-AFB5F1B43823}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEDED553-DD50-4892-8EFC-AFB5F1B43823}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BD7B59A-915A-40E2-A332-83CE178F9336}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BD7B59A-915A-40E2-A332-83CE178F9336}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BD7B59A-915A-40E2-A332-83CE178F9336}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BD7B59A-915A-40E2-A332-83CE178F9336}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AEDED553-DD50-4892-8EFC-AFB5F1B43823} = {8F2761D2-F4FA-4B0A-8200-788118F0DE4D}
+	EndGlobalSection
+EndGlobal

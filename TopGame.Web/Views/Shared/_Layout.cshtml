@@ -1,0 +1,20 @@
+﻿@using System.Web.Optimization
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @RenderSection("PageScript", false)
+    @Styles.Render("~/Content/css")
+    @RenderSection("PageStyle", false)
+</head>
+    <body>
+        <section id="container">@RenderBody()</section>
+        <footer>
+            Criado por <a href="http://www.sistemanavis.com.br" target="_blank">Ação Sistemas</a> | © Copyright @DateTime.Now.Year - Todos os direitos reservados.
+        </footer>
+    </body>
+</html>

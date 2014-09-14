@@ -1,0 +1,21 @@
+﻿@model JogoViewModel
+
+@if (Model.TemPremios)
+{
+    <div id="box-premios" class="hide">
+        <p>Veja quais são os prêmios que você estará concorrendo:</p>
+        <ul>
+            @foreach (var premio in Model.Premios)
+            {
+                if (premio.Brinde)
+                {
+                    <li>Brinde: @premio.Descricao</li>
+                }
+                else
+                {
+                    <li><span>@(premio.Posicao)º</span>Lugar - @premio.Descricao</li>
+                }
+            }
+        </ul>
+    </div>
+}

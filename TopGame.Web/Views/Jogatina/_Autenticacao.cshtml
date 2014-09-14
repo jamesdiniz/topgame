@@ -1,0 +1,77 @@
+﻿@model JogadorViewModel
+
+<div id="box-identificacao" class="clearfix">
+    <h3>Identifique-se</h3>
+    @using (Html.BeginForm("Identificacao", "Conta", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary("Por favor, corriga os erros abaixo para continuar.")
+        <div class="fl">
+            <div>
+                @Html.LabelFor(x => x.Documento)
+                @Html.TextBoxFor(x => x.Documento, new { size = 14, maxlength = 14, placeholder = "", autocomplete = "off", onchange = "buscaCadastro(this.value);" })
+            </div>
+            <div>
+                @Html.LabelFor(x => x.Nome)
+                @Html.TextBoxFor(x => x.Nome, new { size = 45, maxlength = 80, placeholder = "", autocomplete = "off" })
+            </div>
+            <div>
+                @Html.LabelFor(x => x.Email)
+                @Html.TextBoxFor(x => x.Email, new { size = 45, maxlength = 200, placeholder = "", autocomplete = "off" })
+            </div>
+        </div>
+    }
+</div>
+
+<h3 style="color:#003572; margin-bottom: 5px; margin-left: 5px;">Sua foto:</h3>
+
+<div class="clearfix">
+    <video autoplay id="video" style="width: 180px; height: 135px; border:1px solid #ccc; margin-left: 5px;" class="fl"></video>
+    <button onclick="snapshot();" class="fl" style="margin: 60px 5px 0 5px; padding: 3px 0; cursor: pointer;">Capturar</button>
+    <canvas id="canvas" style="width: 180px; height: 135px; border:2px dashed #A1C9DB;" class="fl"></canvas>
+</div>
+
+<div class="text-center">
+    <a href="javascript:void(0);" class="btn btn-iniciar" style="display:block; margin-top: 15px;">Iniciar</a>
+</div>
+
+<script type="text/javascript">
+
+    var video = document.querySelector("#video");
+    var canvas = document.querySelector('#canvas');
+    var ctx = canvas.getContext('2d');
+    var localMediaStream = null;
+
+    var onCameraFail = function (e) {
+        alert('A camera não está funcionando.', e);
+    };
+
+    function snapshot() {
+        if (localMediaStream) {
+            console.log("Video:\nW:" + video.width + "\nH:" + video.height);
+            console.log("Canvas:\nW:" + canvas.width + "\nH:" + canvas.height);
+
+            canvas.width = 130;
+            canvas.height = 98;
+
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            var image = canvas.toDataURL("image/png");
+            image = image.replace('data:image/png;base64,', '');
+
+            $.post('/Jogatina/Teste', { imageData: image }, function (resultado) {
+                hideLoading();
+                console.log(resultado);
+            });
+        }
+    }
+
+    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+    window.URL = window.URL || window.webkitURL;
+
+    navigator.getUserMedia({ video: true, }, function (stream) {
+        video.src = window.URL.createObjectURL(stream);
+        localMediaStream = stream;
+    }, onCameraFail);
+
+</script>

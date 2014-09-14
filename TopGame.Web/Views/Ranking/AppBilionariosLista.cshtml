@@ -1,0 +1,175 @@
+﻿@model IEnumerable<RankingViewModel>
+
+@{
+    ViewBag.Title = ViewBag.Jogo + " | Ranking";
+}
+
+<div class="clearfix" style="padding: 5px;">
+    <img src="/Images/ico-ranking.png" width="45" height="45" style="margin-right: 8px;" alt="" class="fl" />
+    <h2 style="margin-top: 5px;">Ranking</h2>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th class="posicao text-center">Posição</th>
+            <th>Jogador</th>
+            <th style="width: 120px;" class="text-center">Ponto (Ranking)</th>
+            <th style="width: 120px;" class="text-center">Ponto (Fortuna)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            var index = 1;
+            foreach (var ranking in Model)
+            {
+                <tr id="@ranking.JogadorId">
+                    <td class="text-center" id="">
+                        @(index)º
+                        @Html.Hidden("Posicao", index)
+                    </td>
+                    <td>
+                        <img src="/Images/ico-avatar.png" width="42" height="42" style="margin-right: 5px;" alt="" class="fl" />
+                        <span class="fl" style="margin-top: 10px;">@ranking.Jogador</span>
+                    </td>
+                    <td class="text-center">@ranking.Pontuacao</td>
+                    <td class="text-center">@ranking.PontuacaoAdicional</td>
+                </tr>
+                index++;
+            }
+        }
+    </tbody>
+</table>
+
+@section PageScript
+{
+    <script type="text/javascript">
+        $(function() {
+            $("table tbody tr").on('click', function() {
+                var jogador = $(this).attr('id');
+                var posicao = $(this).find("[name='Posicao']:hidden").val();
+
+                if ($(".ctn").length == 0)
+                    $("body").prepend("<div class=\"ctn\">");
+                
+                $(".ctn").load('/Ranking/Bilionarios/356a192b7913b04c54574d18c28d46e6395428ab/Detalhes', { jogadorId: jogador, posicao: posicao },
+                    function() {
+                        $("#loader-container").fadeIn("fast");
+                    });
+            });
+
+            $(document).on('click', '#modal a.btn-fechar', function() {
+                $("#loader-container").fadeOut("fast");
+            });
+        });
+    </script>    
+}
+
+@section PageStyle
+{
+    <style type="text/css">
+        table {
+            width: 100%;
+            border: none;
+            border-spacing: 0;
+            border-collapse: collapse;
+        }
+        table tbody td {
+            cursor: pointer;
+        }
+        table th, table td {
+            text-align: left;
+            padding: 5px 10px;
+        }
+        table th {
+            background-color: #003572;
+            color: #ffffff;
+            font-weight: normal;
+        }
+        table th.posicao {
+            width: 60px;
+        }
+        table td {
+            height: 45px;
+        }
+        table tbody tr:nth-child(odd) {
+            background-color: #f7f7f7;
+        }
+        table tbody tr:hover {
+            background-color: #ECECDC;
+        }
+
+        #modal {
+            width: 600px;
+            height: 290px;
+            background-color: #ffffff;
+            border: solid 1px #cccccc;
+            border-radius: 5px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            margin-top: -156px;
+            margin-left: -311px;
+            padding: 10px;
+        }
+        #modal a.btn-fechar{
+            position: absolute;
+            right: -12px;
+            top: -10px;
+            padding: 1px 5px;
+            display: block;
+            background-color: #333;
+            border: solid 2px #ffffff;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            color: #ffffff;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        #modal table {
+            font-size: 0.8em;
+            margin-top: 15px;
+        }
+        #modal table tr.bloco-header td {
+            background-color: #D6E6F7;
+        }
+        #modal table td.bloco-border {
+            border-left: solid 1px #cccccc;
+        }
+        #modal table td {
+            padding: 2px 5px;
+            height: 35px;
+        }
+        #modal table thead th,
+        #modal table thead td,
+        #modal table tbody td {
+            text-align: center;
+        }
+        #modal table tfoot td {
+            background-color: #DCDFE0;
+        }
+        #modal .header img {
+            margin-right: 7px;
+            float: left;
+            width: 42px;
+            height: 42px;
+        }
+        #modal .header h2 {
+            margin-top: 5px;
+        }
+        #modal .header .trofeu {
+            width: 45px;
+            height: 45px;
+            background-color: #71C6E7;
+            border-radius: 50px;
+            color: #ffffff;
+            text-align: center;
+        }
+        #modal .header .trofeu span {
+            font-size: 1.5em;
+            display: block;
+            margin-top: 7px;
+        }
+    </style>   
+}

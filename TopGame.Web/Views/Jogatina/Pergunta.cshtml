@@ -1,0 +1,41 @@
+﻿@using System.Linq
+@model RodadaViewModel
+
+@functions
+{
+    public string MontaAlternativa()
+    {
+        var saida = Model.Respostas.Aggregate("", (current, resposta) => current + string.Format("<li id=\""+ resposta.Id +"\">{0}{1}</li>", resposta.Descricao, Model.TipoResposta == TopGame.Core.Domain.TipoResposta.Digitacao ? Html.TextBox("RSP|" + Model.PerguntaId + "|" + resposta.Id, null, resposta.AtributoItem).ToHtmlString() : string.Empty));
+        return string.Concat("<ul>", saida, "</ul>");
+    }
+}
+
+<div class="container">
+    @using (Html.BeginForm("Pergunta", "Jogatina", FormMethod.Post, new { name = "formPergunta" }))
+    {
+        @Html.AntiForgeryToken()
+        <div id="box-perguntas">
+            @if (Model.TipoResposta == TopGame.Core.Domain.TipoResposta.Alternativa)
+            {
+                @Html.Hidden("TipoResposta", "0")
+                @Html.Hidden("RSP|" + Model.PerguntaId)
+            }
+            else
+            {
+                @Html.Hidden("TipoResposta", "1")
+            }
+            <div class="text-center">
+                @if (!string.IsNullOrEmpty(Model.Foto))
+                {
+                    <img alt="" src="@Model.Foto" />
+                }
+                <p>@Model.Pergunta</p>
+            </div>
+            <div class="paginacao text-right">Pergunta @Model.Configuracao.QuantidadeRespondida / @Model.Configuracao.QuantidadePergunta</div>
+            <div id="box-respostas">
+                @Html.Raw(MontaAlternativa())
+            </div>
+            <a href="javascript:void(0);" class="btn btn-enviar">Enviar</a>
+        </div>
+    }
+</div>

@@ -1,0 +1,91 @@
+﻿/**
+ *  Descrição dos prêmios
+ */
+#box-premios {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+#box-premios ul {
+    margin-top: 10px;
+    font-size: 0.8em;
+}
+#box-premios ul li > span {
+    width: 30px;
+    display: block;
+    float: left;
+}
+
+/**
+ *  Identificação
+ */
+#box-identificacao {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+#box-identificacao > h3 {
+    margin-bottom: 20px;
+    color: #003572;
+    text-align: center;
+}
+#box-identificacao > p {
+    font-size: 0.8em;
+}
+#box-identificacao form div {
+    margin-bottom: 10px;
+}
+#box-identificacao form label {
+    width: 75px;
+    display: block;
+    float: left;
+    color: #009BDF;
+    font-weight: normal;
+}
+
+.btn-iniciar {
+    text-transform: uppercase;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+/**
+ *  Rodada de perguntas
+ */
+#box-perguntas img:first-child {
+    margin-bottom: 15px;
+    -webkit-box-shadow: 4px 4px 5px 0 #8c8c8c;
+    -webkit-box-shadow: 4px 4px 5px 0 rgba(140, 140, 140, 0.45);
+    -moz-box-shadow: 4px 4px 5px 0 #8c8c8c;
+    -moz-box-shadow: 4px 4px 5px 0 rgba(140, 140, 140, 0.45);
+    box-shadow: 4px 4px 5px 0 #8c8c8c;
+    box-shadow: 4px 4px 5px 0 rgba(140, 140, 140, 0.45);
+}
+
+#box-respostas {
+    margin-top: 10px;
+}
+
+#box-respostas ul li {
+    background-color: #cee0e0;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #008080;
+    cursor: pointer;
+}
+
+#box-respostas ul li.selected {
+    background-color: #d58e00;
+    color: #ffffff;
+}
+
+.paginacao {
+    font-size: 0.8em;
+    margin-top: 5px;
+}
+
+.btn-enviar {
+    padding: 5px 0;
+    display: block;
+    width: 100%;
+    text-align: center;
+}

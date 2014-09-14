@@ -1,0 +1,34 @@
+﻿@model RankingPosicaoViewModel
+
+@{
+    ViewBag.Title = "Classificação";
+}
+
+<div style="width: 550px; margin:10px auto 0 auto;">
+    <table>
+        <tr>
+            <td>
+                @*<img src="/Images/Jogador/@Model.JogadorId/foto.jpg" alt="" width="256" height="256" />*@
+                <img src="/Images/ico-avatar.png" alt="" width="256" height="256" style="margin-right: 10px;" />
+            </td>
+            <td valign="top">
+                <h2 style="font-size: 2em; color: #003572">@Model.Jogador</h2>
+                <span style="font-size: 72px;">@(Model.Posicao)º</span>
+            </td>
+        </tr>
+    </table>
+</div>
+
+@section PageStyle
+{
+    <style type="text/css">
+        body {
+            background-color: #E0ECEE;
+        }
+
+        img {
+            border: solid 10px #ffffff;
+            border-radius: 150px;
+        }
+    </style>
+}

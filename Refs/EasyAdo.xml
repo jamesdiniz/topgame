@@ -1,0 +1,492 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EasyAdo</name>
+    </assembly>
+    <members>
+        <member name="T:EasyAdo.Config.DbSettings">
+            <summary>
+            Classe auxiliar para acessar configurações do aplicativo
+            </summary>
+        </member>
+        <member name="M:EasyAdo.Config.DbSettings.#ctor">
+            <summary>
+            Construtor padrão
+            </summary>
+        </member>
+        <member name="M:EasyAdo.Config.DbSettings.FromConfig(System.String)">
+            <summary>
+            Carrega configurações com base no arquivo de configuração
+            </summary>
+            <param name="connectionStringName">Nome da connectionString</param>
+            <returns>Objeto contendo as informações de conexão</returns>
+        </member>
+        <member name="M:EasyAdo.Config.DbSettings.FromConfig(System.String,System.String)">
+            <summary>
+            Carrega configurações com base no arquivo de configuração
+            </summary>
+            <param name="connectionString">Conexão para esta instância</param>
+            <param name="providerName">Nome do provedor para esta intância</param>
+            <returns>Objeto contendo as informações de conexão</returns>
+        </member>
+        <member name="M:EasyAdo.Config.DbSettings.FromConfig(System.Configuration.ConnectionStringSettings)">
+            <summary>
+            Carrega configurações com base no arquivo de configuração
+            </summary>
+            <param name="connectionStringSettings">Objeto contendo configurações de conexão</param>
+            <returns>Objeto contendo as informações de conexão</returns>
+        </member>
+        <member name="M:EasyAdo.Config.DbSettings.GetSettingsFromName(System.String)">
+            <summary>
+            Método interno para pegar objeto com configurações usando o nome da string
+            </summary>
+            <param name="connectionStringName">Nome da connectionString</param>
+            <returns>Objeto contendo as informações de conexão</returns>
+        </member>
+        <member name="P:EasyAdo.Config.DbSettings.ConnectionString">
+            <summary>
+            Conexão desta instância
+            </summary>
+        </member>
+        <member name="P:EasyAdo.Config.DbSettings.ProviderName">
+            <summary>
+            Nome do provedor desta intância
+            </summary>
+        </member>
+        <member name="T:EasyAdo.Interface.IConnectionFactory">
+            <summary>
+            Contrato da fábrica de conexão
+            </summary>
+        </member>
+        <member name="M:EasyAdo.Interface.IConnectionFactory.CreateConnection(System.String)">
+            <summary>
+            Criar uma conexão do tipo IDbConnection
+            </summary>
+            <param name="connectionString"></param>
+            <returns>Retorna conexão</returns>
+        </member>
+        <member name="T:EasyAdo.MySqlContext">
+            <summary>
+            Contexto usando banco de dados MySql
+            </summary>
+        </member>
+        <member name="T:EasyAdo.DbContext">
+            <summary>
+            Classe genérica para trabalhar com bancos de dados usando ADO.net
+            </summary>
+        </member>
+        <member name="T:EasyAdo.Interface.IDbContext">
+            <summary>
+            Contrato de configuração do contexto
+            </summary>
+        </member>
+        <member name="M:EasyAdo.Interface.IDbContext.Execute(System.String,System.Data.CommandType,EasyAdo.Builder.DbParameterBuilder)">
+            <summary>
+            Inicializa objeto de execução
+            </summary>
+            <param name="query">Sql de consulta ou nome da stored procedure</param>
+            <param name="type">Tipo de comando</param>
+            <param name="parameters">Objeto contendo parâmetros DbParameter</param>
+            <returns>Objeto contendo métodos de persistência/leitura</returns>
+        </member>
+        <member name="M:EasyAdo.Interface.IDbContext.BeginTransaction">
+            <summary>
+            Inicia uma transação
+            </summary>
+        </member>
+        <member name="M:EasyAdo.Interface.IDbContext.Commit">
+            <summary>
+            Envia qualquer transação em vigor.
+            </summary>
+        </member>
+        <member name="M:EasyAdo.Interface.IDbContext.Rollback">
+            <summary>
+            Reverte qualquer transação em vigor.
+            </summary>
+        </member>
+        <member name="P:EasyAdo.Interface.IDbContext.ConnectionString">
+            <summary>
+            Define ou retorna o uso de sequência de conexão para todas as instâncias dessa classe.
+            </summary>
+        </member>
+        <member name="P:EasyAdo.Interface.IDbContext.Transaction">
+            <summary>
+            Retorna o objeto atual Transaction ou nulo se nenhuma transação estiver em vigor.
+            </summary>
+        </member>
+        <member name="M:EasyAdo.DbContext.#ctor">
+            <summary>
+            Construtor usando banco de dados padrão.
+            <para>Esta opção irá buscar no arquivo de configuração uma entrada com nome "DefaultConnectionString".</para>
+            </summary>
+        </member>
+        <member name="M:EasyAdo.DbContext.#ctor(System.String)">
+            <summary>
+            Construtor usando banco de dados conforme arquivo de configuração.
+            </summary>
+            <param name="connectionStringName">Nome da conexão no arquivo de configuração</param>
+        </member>
+        <member name="M:EasyAdo.DbContext.#ctor(System.String,System.String)">
+            <summary>
+            Construtor usando string e provedor de conexão
+            </summary>
+            <param name="connectionString">String de conexão para esta instância</param>
+            <param name="providerName">Nome do provedor para esta instância</param>
+        </member>
+        <member name="M:EasyAdo.DbContext.#ctor(EasyAdo.DbContext.DbType)">
+            <summary>
+            Construtor usando banco de dados conforme o tipo do banco.
+            <para>Atenção: Requer entrada no arquivo de configuração no formato: [DbType]ConnectionString.</para>
+            <example>Exemplo: MsSqlConnectionString</example>
+            </summary>
+            <param name="type">Tipo de banco de dados</param>
+        </member>
+        <member name="M:EasyAdo.DbContext.#ctor(System.Data.IDbConnection)">
+            <summary>
+            Construtor usando conexão existente
+            </summary>
+            <param name="connection">Conexão existente</param>
+        </member>
+        <member name="M:EasyAdo.DbContext.Init(EasyAdo.Config.DbSettings)">
+            <summary>
+            Inicializa atributos da classe.
+            </summary>
+            <param name="settings"></param>
+        </member>
+        <member name="M:EasyAdo.DbContext.Init(System.Data.IDbConnection)">
+            <summary>
+            Inicializa atributos da classe usando conexão existente.
+            </summary>
+            <param name="connection">Conexão existente</param>
+        </member>
+        <member name="M:EasyAdo.DbContext.Connect">
+            <summary>
+            Abre a conexão com banco de dados. 
+            </summary>
+        </member>
+        <member name="M:EasyAdo.DbContext.CreateCommand(System.String,System.Data.CommandType,EasyAdo.Builder.DbParameterBuilder)">
+            <summary>
+            Constrói um objeto Command com os parâmetros fornecidos.
+            </summary>
+            <param name="query">SQL de consulta ou nome da stored procedure</param>
+            <param name="type">Tipo de comando SQL</param>
+            <param name="parameters">Objeto contendo parâmetros DbParameter</param>
+            <returns></returns>
+        </member>
+        <member name="M:EasyAdo.DbContext.Execute(System.String,System.Data.CommandType,EasyAdo.Builder.DbParameterBuilder)">
+            <summary>
+            Inicializa objeto de execução
+            </summary>
+            <param name="query">Sql de consulta ou nome da stored procedure</param>
+            <param name="type">Tipo de comando</param>
+            <param name="parameters">Objeto contendo parâmetros DbParameter</param>
+            <returns>Objeto contendo métodos de persistência/leitura</returns>
+        </member>
+        <member name="M:EasyAdo.DbContext.ParameterBuilder">
+            <summary>
+            Método para criação de objetos DbParameter
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:EasyAdo.DbContext.BeginTransaction">
+            <summary>
+            Inicia uma transação
+            </summary>
+            <returns>Novo objeto Transaction</returns>
+        </member>
+        <member name="M:EasyAdo.DbContext.Commit">
+            <summary>
+            Envia qualquer transação em vigor.
+            </summary>
+        </member>
+        <member name="M:EasyAdo.DbContext.Rollback">
+            <summary>
+            Reverte qualquer transação em vigor.
+            </summary>
+        </member>
+        <member name="M:EasyAdo.DbContext.Dispose">
+            <summary>
+            Implementação do IDisposable
+            </summary>
+        </member>
+        <member name="M:EasyAdo.DbContext.Dispose(System.Boolean)">
+            <summary>
+            Limpa recursos utilizados pelo objeto da classe.
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="P:EasyAdo.DbContext.ConnectionString">
+            <summary>
+            Retorna a string de conexão atual.
+            </summary>
+        </member>
+        <member name="P:EasyAdo.DbContext.Transaction">
+            <summary>
+            Retorna o objeto atual Transaction ou nulo se nenhuma transação estiver em vigor.
+            </summary>
+        </member>
+        <member name="T:EasyAdo.DbContext.DbType">
+            <summary>
+            Tipo de banco de dados suportado
+            </summary>
+        </member>
+        <member name="F:EasyAdo.DbContext.DbType.Firebird">
+            <summary>
+            Usa Firebird como fonte de dados
+            </summary>
+        </member>
+        <member name="F:EasyAdo.DbContext.DbType.MsSql">
+            <summary>
+            Usa MsSql como fonte de dados
+            </summary>
+        </member>
+        <member name="F:EasyAdo.DbContext.DbType.MySql">
+            <summary>
+            Usa MySql como fonte de dados
+            </summary>
+        </member>
+        <member name="M:EasyAdo.MySqlContext.#ctor">
+            <summary>
+            Construtor padrão usando MySql como fonte de dados
+            </summary>
+        </member>
+        <member name="T:EasyAdo.SqlContext">
+            <summary>
+            Contexto usando banco de dados MsSql
+            </summary>
+        </member>
+        <member name="M:EasyAdo.SqlContext.#ctor">
+            <summary>
+            Construtor padrão usando MsSql como fonte de dados
+            </summary>
+        </member>
+        <member name="T:EasyAdo.FbContext">
+            <summary>
+            Contexto usando banco de dados Firebird
+            </summary>
+        </member>
+        <member name="M:EasyAdo.FbContext.#ctor">
+            <summary>
+            Construtor padrão usando Firebird como fonte de dados
+            </summary>
+        </member>
+        <member name="T:EasyAdo.Builder.DbParameterBuilder">
+            <summary>
+            Classe auxiliar para criação de objetos DbParameter
+            </summary>
+        </member>
+        <member name="M:EasyAdo.Builder.DbParameterBuilder.#ctor(System.Data.IDbCommand)">
+            <summary>
+            Construtor padrão com instância do objeto IDbCommand
+            </summary>
+            <param name="command">Intância do objeto IDbCommand</param>
+        </member>
+        <member name="M:EasyAdo.Builder.DbParameterBuilder.Add(System.String,System.Object)">
+            <summary>
+            Método de inserção de novo parâmentro
+            </summary>
+            <param name="name">Nome do parâmetro</param>
+            <param name="value">Valor do parâmetro</param>
+            <returns>Retorna o próprio objeto atualizado com os parâmetros</returns>
+        </member>
+        <member name="M:EasyAdo.Builder.DbParameterBuilder.Add(System.String,System.Object,System.Data.ParameterDirection,System.Data.DbType,System.Int32)">
+            <summary>
+            Método de inserção de novo parâmentro
+            </summary>
+            <param name="name">Nome do parâmetro</param>
+            <param name="value">Valor do parâmetro</param>
+            <param name="direction">Direção do campo em relação ao DataSet</param>
+            <param name="dbType">Tipo do campo</param>
+            <param name="size">Tamanho do campo</param>
+            <returns>Retorna o próprio objeto atualizado com os parâmetros</returns>
+        </member>
+        <member name="M:EasyAdo.Builder.DbParameterBuilder.Add(System.Object,System.Char)">
+            <summary>
+            Método de inserção de novo parâmentro com base no objeto
+            </summary>
+            <param name="instance">Objeto a ser refletido</param>
+            <param name="caracterParameter">Caracter de parâmetro</param>
+            <returns>Retorna o próprio objeto atualizado com os parâmetros</returns>
+        </member>
+        <member name="M:EasyAdo.Builder.DbParameterBuilder.CreateParameter(System.String,System.Object)">
+            <summary>
+            Cria parâmetro.
+            </summary>
+            <param name="name">Nome do parâmetro.</param>
+            <param name="value">Valor do parâmetro.</param>
+            <returns>Objeto com base nos dados informados</returns>
+        </member>
+        <member name="M:EasyAdo.Builder.DbParameterBuilder.CreateParameter(System.String,System.Object,System.Data.ParameterDirection,System.Data.DbType,System.Int32)">
+            <summary>
+            Cria parâmetro.
+            </summary>
+            <param name="name">Nome do parâmetro.</param>
+            <param name="value">Valor do parâmetro.</param>
+            <param name="direction"></param>
+            <param name="dbType">Tipo do dado.</param>
+            <param name="size">Tamanho máximo do dados.</param>
+            <returns>Objeto com base nos dados informados</returns>
+        </member>
+        <member name="M:EasyAdo.Builder.DbParameterBuilder.CreateParameter(System.Object,System.Char)">
+            <summary>
+            Cria parâmetros de acordo com as propriedades do objeto.
+            </summary>
+            <param name="instance">Instância do objeto.</param>
+            <param name="caracterParameter">Caracter de parâmetro</param>
+            <returns>Uma coleção de DbParameter.</returns>
+        </member>
+        <member name="P:EasyAdo.Builder.DbParameterBuilder.Parameters">
+            <summary>
+            Lista contendo objetos DbParameter
+            </summary>
+        </member>
+        <member name="T:EasyAdo.Executor">
+            <summary>
+            Classe para execução de comandos
+            </summary>
+        </member>
+        <member name="T:EasyAdo.Interface.IExecutor">
+            <summary>
+            Contrato contendo métodos de execução
+            </summary>
+        </member>
+        <member name="M:EasyAdo.Interface.IExecutor.AsNonQuery">
+            <summary>
+            Executa uma consulta que retorna o número de linhas afetadas.
+            </summary>
+            <returns>Retorna o número de linhas afetadas</returns>
+        </member>
+        <member name="M:EasyAdo.Interface.IExecutor.AsScalar">
+            <summary>
+            Executa uma consulta que retorna um único valor.
+            </summary>
+            <returns>Retorna o valor da primeira coluna/linha dos resultados</returns>
+        </member>
+        <member name="M:EasyAdo.Interface.IExecutor.AsDataReader">
+            <summary>
+            Executa uma consulta que retorna os resultados como DataReader.
+            </summary>
+            <returns>Retona um objeto DataReader</returns>
+        </member>
+        <member name="M:EasyAdo.Interface.IExecutor.AsDataSet(System.Data.Common.DbDataAdapter)">
+            <summary>
+            Executa uma consulta que retorna os resultados como DataSet.
+            </summary>
+            <param name="adapter">Implementação do DataAdapter</param>
+            <returns>Retorna um objeto DataSet</returns>
+        </member>
+        <member name="M:EasyAdo.Interface.IExecutor.AsDataTable(System.Data.Common.DbDataAdapter)">
+            <summary>
+            Executa uma consulta que retorna os resultados como DataTable.
+            </summary>
+            <param name="adapter">Implementação do DataAdapter</param>
+            <returns>Resultados como um objeto DataTable</returns>
+        </member>
+        <member name="M:EasyAdo.Executor.#ctor(System.Data.IDbCommand)">
+            <summary>
+            Construtor padrão para executar comando
+            </summary>
+            <param name="command">Comando associado a conexão</param>
+        </member>
+        <member name="M:EasyAdo.Executor.AsNonQuery">
+            <summary>
+            Executa uma consulta que retorna o número de linhas afetadas.
+            </summary>
+        </member>
+        <member name="M:EasyAdo.Executor.AsScalar">
+            <summary>
+            Executa uma consulta que retorna um único valor
+            </summary>
+        </member>
+        <member name="M:EasyAdo.Executor.AsDataReader">
+            <summary>
+            Executa uma consulta que retorna os resultados como DataReader
+            </summary>
+        </member>
+        <member name="M:EasyAdo.Executor.AsDataSet(System.Data.Common.DbDataAdapter)">
+            <summary>
+            Executa uma consulta que retorna os resultados como DataSet
+            </summary>
+        </member>
+        <member name="M:EasyAdo.Executor.AsDataTable(System.Data.Common.DbDataAdapter)">
+            <summary>
+            Executa uma consulta que retorna os resultados como DataTable
+            </summary>
+        </member>
+        <member name="T:EasyAdo.Interface.IExecutorAsync">
+            <summary>
+            Contrato contendo métodos de execução async
+            </summary>
+        </member>
+        <member name="M:EasyAdo.Interface.IExecutorAsync.AsNonQueryAsync">
+            <summary>
+            Executa uma consulta que retorna o número de linhas afetadas.
+            </summary>
+            <returns>Retorna o número de linhas afetadas</returns>
+        </member>
+        <member name="M:EasyAdo.Interface.IExecutorAsync.AsScalarAsync">
+            <summary>
+            Executa uma consulta que retorna um único valor.
+            </summary>
+            <returns>Retorna o valor da primeira coluna/linha dos resultados</returns>
+        </member>
+        <member name="M:EasyAdo.Interface.IExecutorAsync.AsDataReaderAsync">
+            <summary>
+            Executa uma consulta que retorna os resultados como DataReader.
+            </summary>
+            <returns>Retona um objeto DataReader</returns>
+        </member>
+        <member name="M:EasyAdo.Interface.IExecutorAsync.AsDataSetAsync(System.Data.Common.DbDataAdapter)">
+            <summary>
+            Executa uma consulta que retorna os resultados como DataSet.
+            </summary>
+            <param name="adapter">Implementação do DataAdapter</param>
+            <returns>Retorna um objeto DataSet</returns>
+        </member>
+        <member name="M:EasyAdo.Interface.IExecutorAsync.AsDataTableAsync(System.Data.Common.DbDataAdapter)">
+            <summary>
+            Executa uma consulta que retorna os resultados como DataTable.
+            </summary>
+            <param name="adapter">Implementação do DataAdapter</param>
+            <returns>Resultados como um objeto DataTable</returns>
+        </member>
+        <member name="T:EasyAdo.Extensions.DataReaderExtensions">
+            <summary>
+            Extensão do objeto DataReader com métodos auxiliares
+            </summary>
+        </member>
+        <member name="M:EasyAdo.Extensions.DataReaderExtensions.GetValueOrDefault``1(System.Data.IDataReader,System.String)">
+            <summary>
+            Método genérico para testar se valor é nulo e retornar valor correspondente
+            </summary>
+            <typeparam name="T">Tipo de dado a ser retornado</typeparam>
+            <param name="dr">Instância do tipo IDataReader a ser usado</param>
+            <param name="campo">Nome do campo a ser utilizado</param>
+            <returns>Retorna o valor de acordo com o tipo</returns>
+        </member>
+        <member name="M:EasyAdo.Extensions.DataReaderExtensions.ConvertValueType``1(System.Object)">
+            <summary>
+            Converte o valor do objeto para um objeto do tipo T.
+            </summary>
+            <typeparam name="T">Tipo do objeto.</typeparam>
+            <param name="value">Valor do objeto.</param>
+            <returns>Novo valor com o tipo especificado.</returns>
+        </member>
+        <member name="M:EasyAdo.Extensions.DataReaderExtensions.ConvertToList``1(System.Data.IDataReader)">
+            <summary>
+            Converte um objeto IDataReader para uma lista de objeto do tipo T.
+            </summary>
+            <typeparam name="T">Tipo do objeto.</typeparam>
+            <param name="reader">Objeto IDataReader.</param>
+            <returns>Lista com objetos do tipo T.</returns>
+        </member>
+        <member name="M:EasyAdo.Extensions.DataReaderExtensions.ConvertToObject``1(System.Data.IDataReader)">
+            <summary>
+            Cria modelo utilizando campos do objeto IDataReader.
+            </summary>
+            <typeparam name="T">Tipo do objeto.</typeparam>
+            <param name="reader">Objeto IDataReader.</param>
+            <returns>Objeto do tipo T.</returns>
+        </member>
+    </members>
+</doc>

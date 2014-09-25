@@ -48,11 +48,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IDbContext.cs" />
-    <Compile Include="JogoRepository.cs" />
-    <Compile Include="JogadorRepository.cs" />
+    <Compile Include="Mapping\JogadorTokenMap.cs" />
+    <Compile Include="Mapping\PerguntaRespostaJogadorMap.cs" />
+    <Compile Include="Mapping\PerguntaMap.cs" />
+    <Compile Include="Mapping\JogoMap.cs" />
+    <Compile Include="Mapping\JogadorMap.cs" />
     <Compile Include="Mapping\PontuacaoAppMap.cs" />
     <Compile Include="Mapping\ConfiguracaoMap.cs" />
-    <Compile Include="PerguntaRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="TopGameContext.cs" />

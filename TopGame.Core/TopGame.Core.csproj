@@ -50,9 +50,11 @@
     <Compile Include="Domain\Premiacao.cs" />
     <Compile Include="Domain\TipoResposta.cs" />
     <Compile Include="Extensions\StringExtension.cs" />
+    <Compile Include="Helpers\Util.cs" />
+    <Compile Include="Infrastructure\IPerguntaService.cs" />
     <Compile Include="Infrastructure\IPontuacaoService.cs" />
     <Compile Include="Infrastructure\IConfiguracaoService.cs" />
-    <Compile Include="Infrastructure\IJogoRepository.cs" />
+    <Compile Include="Infrastructure\IJogoService.cs" />
     <Compile Include="Infrastructure\IJogadorService.cs" />
     <Compile Include="Infrastructure\IPerguntaRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

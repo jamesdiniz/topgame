@@ -11,9 +11,10 @@ namespace TopGame.Data
 {
     public class TopGameContext : DbContext, IDbContext
     {
-        public TopGameContext(string nameOrConnectionString)
-            : base(nameOrConnectionString)
+        public TopGameContext()
+            : base("name=MsSqlConnectionString")
         {
+            Database.SetInitializer<TopGameContext>(null);
             Database.Log = s => Debug.WriteLine(s);
         }
 

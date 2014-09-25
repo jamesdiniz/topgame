@@ -28,11 +28,10 @@ namespace TopGame.App.Bilionario.Service
             _appRepository.IncluiPontuacao(pontoRanking, pontoFortuna, jogadorRespostaId, jogadorId);
         }
 
-        public IEnumerable<PontuacaoAppBilionarios> GetRanking(int jogoId)
+        public IEnumerable<PontuacaoAppBilionarios> GetRanking(int jogoId, bool? completo)
         {
-            return _appRepository.GetRanking(jogoId);
+            return _appRepository.GetRanking(jogoId, completo);
         }
-
 
         public IEnumerable<PontuacaoAppBilionarios> GetRankingDetalhes(int jogoId, int jogadorId)
         {

@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
+using System.Text;
 using EasyAdo;
 using EasyAdo.Extensions;
 using TopGame.Core.Domain;
@@ -26,9 +26,9 @@ namespace TopGame.App.Bilionario.Repository
             }
         }
 
-        public IEnumerable<PontuacaoAppBilionarios> GetRanking(int jogoId)
+        public IEnumerable<PontuacaoAppBilionarios> GetRanking(int jogoId, bool? completo)
         {
-            const string query =
+            var sb = new StringBuilder(
                 @"SELECT 
 	                jogador.JogadorId, 
 	                jogador.Nome, 
@@ -41,10 +41,20 @@ namespace TopGame.App.Bilionario.Repository
 		                ON resposta.PerguntaRespostaJogadorId = pontuacao.PerguntaRespostaJogadorId
 	                INNER JOIN Pergunta pergunta
 		                ON pergunta.PerguntaId = resposta.PerguntaId
-                WHERE pergunta.JogoId = 1
-                GROUP BY jogador.Nome, jogador.JogadorId
-                ORDER BY Ranking, Fortuna";
+                WHERE pergunta.JogoId = @jogoId");
 
+            if (completo != null)
+            {
+                sb.Append(@" AND (SELECT COUNT(distinct respostaJogador.PerguntaId)
+                    FROM PerguntaRespostaJogador respostaJogador
+                    WHERE respostaJogador.Status = 'R' AND respostaJogador.JogadorId = jogador.JogadorId)");
+
+                sb.Append((bool) completo ? " = 3" : " < 3");
+            }
+
+            sb.Append(@" GROUP BY jogador.Nome, jogador.JogadorId ORDER BY Ranking, Fortuna");
+
+            var query = sb.ToString();
             var ranking = new List<PontuacaoAppBilionarios>();
 
             using (var data = new SqlContext())

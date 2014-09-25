@@ -34,10 +34,10 @@ namespace TopGame.Web.Controllers
         #endregion
 
         [Route("Bilionarios/{jogoId}")]
-        public ActionResult AppBilionariosLista(string jogoId)
+        public ActionResult AppBilionariosLista(string jogoId, bool? c)
         {
             var jogo = _jogoService.GetByToken(jogoId);
-            var ranking = _appService.GetRanking(jogo.JogoId);
+            var ranking = _appService.GetRanking(jogo.JogoId, c);
             var model = ranking.Select(x => new RankingViewModel
             {
                 JogadorId = x.Jogador.JogadorId, 
@@ -77,7 +77,7 @@ namespace TopGame.Web.Controllers
         {
             var jogo = _jogoService.GetByToken(jogoId);
             var index = posicao - 1;
-            var ranking = _appService.GetRanking(jogo.JogoId).ToList();
+            var ranking = _appService.GetRanking(jogo.JogoId, true).ToList();
             var rankingJogador = ranking.ElementAt(index);
 
             var model = new RankingPosicaoViewModel
@@ -121,7 +121,5 @@ namespace TopGame.Web.Controllers
 
             return lista;
         }
-
-        
     }
 }

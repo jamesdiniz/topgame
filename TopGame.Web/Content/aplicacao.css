@@ -41,6 +41,60 @@
     font-weight: normal;
 }
 
+/**
+ *  Captura de foto
+ */
+#webmedia {
+    margin-left: 15px;
+}
+
+#webmedia h3 {
+    color:#003572;
+    text-align: center;
+    margin-bottom: 5px; 
+}
+
+#webmedia .area-captura {
+    width: 182px;
+    height: 137px;
+    position: absolute;
+    margin-left: 5px;
+}
+
+#webmedia .area-captura .marcacao {
+    width: 22px; 
+    background-color: #000000; 
+    background-color: rgba(0,0,0,0.5); 
+    height: 137px; 
+}
+
+#webmedia .area-captura .marcacao.left {
+    border-left: dotted 2px #fff;
+}
+
+#webmedia .area-captura .marcacao.right {
+    border-right: dotted 2px #fff;
+}
+
+#webmedia #video {
+    width: 180px; 
+    height: 135px; 
+    border:1px solid #ccc; 
+    margin-left: 5px;
+}
+
+#webmedia #preview {
+    width: 135px; 
+    height: 135px; 
+    border:2px dashed #A1C9DB;
+}
+
+#webmedia .btn-captura {
+    margin: 60px 10px 0 10px; 
+    padding: 5px; 
+    cursor: pointer;
+}
+
 .btn-iniciar {
     text-transform: uppercase;
     padding-left: 40px;

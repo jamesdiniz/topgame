@@ -8,5 +8,7 @@ namespace TopGame.Web.Models
         public int JogadorId { get; set; }
         public string Jogador { get; set; }
         public int Posicao { get; set; }
+        public double PontoRanking { get; set; }
+        public double PontoFortuna { get; set; }
     }
 }

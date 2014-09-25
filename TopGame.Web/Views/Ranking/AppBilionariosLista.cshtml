@@ -28,7 +28,7 @@
                         @Html.Hidden("Posicao", index)
                     </td>
                     <td>
-                        <img src="/Images/ico-avatar.png" width="42" height="42" style="margin-right: 5px;" alt="" class="fl" />
+                        <img src="/Images/Jogador/thumb-@(ranking.JogadorId).png" alt="" width="42" height="42" style="margin-right: 5px;" class="fl" />
                         <span class="fl" style="margin-top: 10px;">@ranking.Jogador</span>
                     </td>
                     <td class="text-center">@ranking.Pontuacao</td>
@@ -100,7 +100,7 @@
 
         #modal {
             width: 600px;
-            height: 290px;
+            min-height: 290px;
             background-color: #ffffff;
             border: solid 1px #cccccc;
             border-radius: 5px;

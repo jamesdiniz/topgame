@@ -1,11 +1,10 @@
 ﻿var loader;
-//var jogoId;
 var jogoInit = false;
 var jogadorId;
 var jogadorToken;
 
 $(document).ajaxStart(showLoading);
-//$(document).ajaxStop(hideLoading);
+$(document).ajaxStop(hideLoading);
 
 $(function () {
     $("a.btn-iniciar").on('click', function (event) {
@@ -24,9 +23,15 @@ $(function () {
                 loadPergunta();
             } else {
                 loader.hide();
-                alert(data.message);
             }
         }, "json");
+    });
+
+    $('.cpf').mask('000.000.000-00', {
+        reverse: true,
+        onComplete: function(cpf) {
+            buscaCadastro(cpf);
+        }
     });
 });
 
@@ -46,6 +51,22 @@ $(document).on('click', '.btn-enviar', function() {
         }
         $(answer.get(0)).val(item.attr('id'));
     } else {
+        //TODO: Esse bloco acabou se tornando específico somente para o jogo dos bilionários
+        var pRanking = $("#box-respostas ul li input:eq(0)");
+        var pFortuna = $("#box-respostas ul li input:eq(1)");
+
+        if (pRanking.val() != '' && !(parseFloat(pRanking.val()) > 0 && parseFloat(pRanking.val()) <= 50) || pRanking.val() == '') {
+            alert("O valor do ranking deve estar entre 1 e 50.");
+            pRanking.focus();
+            return;
+        }
+
+        if (pFortuna.val() != '' && !(parseFloat(pFortuna.val()) > 0 && parseFloat(pFortuna.val()) <= 100) || pFortuna.val() == '') {
+            alert("O valor da fortuna deve estar entre 1 e 100.");
+            pFortuna.focus();
+            return;
+        }
+
         var erro = false;
         answer = $("[name^='RSP|']");
         answer.each(function (index, element) {
@@ -83,13 +104,11 @@ function showLoading() {
 
 function hideLoading() {
     if (loader)
-        loader.hide();
+        loader.fadeOut("fast");
 }
 
 function loadPergunta() {
-    delayChamada(function() {
-        $("#content").load(window.location.pathname + '/Pergunta/?jogadorId=' + jogadorId + '&token=' + jogadorToken);
-    });
+    $("#content").load(window.location.pathname + '/Pergunta/?jogadorId=' + jogadorId + '&token=' + jogadorToken);
 }
 
 function postPergunta() {
@@ -101,18 +120,6 @@ function postPergunta() {
             console.log("Erro: " + resultado.message);
         }
     });
-}
-
-// TODO: Remover quando estiver tudo finalizado, isso serve apenas testar localmente aplicando um delay no loader
-function delayChamada(callback) {
-    setTimeout(
-        function () {
-            loader.fadeOut("fast", function () {
-                callback();
-                $(this).hide();
-            });
-        }, 2000
-    );
 }
 
 function marcaResposta(obj) {
@@ -129,8 +136,5 @@ function buscaCadastro(cpf) {
             $("#Nome").val(resultado.nome);
             $("#Email").val(resultado.email);
         }
-
-        hideLoading();
     });
-
 }

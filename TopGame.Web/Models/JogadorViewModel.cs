@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using TopGame.Web.Framework.Validator;
 
 namespace TopGame.Web.Models
 {
@@ -17,7 +18,11 @@ namespace TopGame.Web.Models
 
         [Required(ErrorMessage = "O campo documento precisa ser informado.")]
         [StringLength(14, ErrorMessage = "Tamanho máximo permitido é de 14 caracteres.")]
+        [CustomValidationCpf(ErrorMessage = "CPF informado não é válido.")]
         [DisplayName("CPF")]
         public string Documento { get; set; }
+
+        [Required(ErrorMessage = "É necessário capturar uma foto.")]
+        public string Foto { get; set; }
     }
 }

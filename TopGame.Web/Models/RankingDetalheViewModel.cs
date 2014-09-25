@@ -6,6 +6,7 @@ namespace TopGame.Web.Models
     public class RankingDetalheViewModel
     {
         public int JogoId { get; set; }
+        public int JogadorId { get; set; }
         public string Jogador { get; set; }
         public int Posicao { get; set; }
         public IEnumerable<RankingPerguntaViewModel> Perguntas { get; set; }

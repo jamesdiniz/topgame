@@ -141,6 +141,8 @@
     <Content Include="Images\ico-ranking.png" />
     <Content Include="Images\ico-avatar.png" />
     <Content Include="Scripts\aplicacao.js" />
+    <Content Include="Scripts\autenticacao.js" />
+    <Content Include="Scripts\funcoes.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />

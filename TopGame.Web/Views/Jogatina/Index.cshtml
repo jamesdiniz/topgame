@@ -25,10 +25,11 @@
 @section PageScript
 {
     @Scripts.Render("~/Scripts/aplicacao.js")
+    @Scripts.Render("~/Scripts/Plugins/jquery.mask.min.js")
 }
 
 @section PageStyle
 {
     @Styles.Render("~/Content/aplicacao.css")
-    @Styles.Render("~/Content/estilo/356a192b7913b04c54574d18c28d46e6395428ab.css")
+    @Styles.Render("~/Content/estilo/" + Model.Token + ".css")
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using TopGame.App.Bilionario.Service;
 using TopGame.Core.Domain.Pontuacao;
-using TopGame.Service;
+using TopGame.Core.Infrastructure;
 using TopGame.Web.Models;
 
 namespace TopGame.Web.Controllers
@@ -14,16 +14,16 @@ namespace TopGame.Web.Controllers
     {
         #region Fields
 
-        private readonly JogoService _jogoService;
+        private readonly IJogoService _jogoService;
         private readonly AppService _appService;
 
         #endregion
 
         #region Ctor
 
-        public RankingController()
+        public RankingController(IJogoService jogoService)
         {
-            _jogoService = new JogoService();
+            _jogoService = jogoService;
             _appService = new AppService();
         }
 
@@ -55,12 +55,15 @@ namespace TopGame.Web.Controllers
         public PartialViewResult AppBilionariosDetalhes(string jogoId, int jogadorId, int posicao)
         {
             var jogo = _jogoService.GetByToken(jogoId);
-            var ranking = _appService.GetRankingDetalhes(jogo.JogoId, jogadorId);
+            var ranking = _appService.GetRankingDetalhes(jogo.JogoId, jogadorId).ToList();
+            var jogador = ranking.FirstOrDefault();
+
             var model = new RankingDetalheViewModel
             {
                 JogoId = jogo.JogoId,
                 Posicao = posicao,
-                Jogador = ranking.FirstOrDefault().Jogador.Nome,
+                JogadorId = jogador.JogadorId,
+                Jogador = jogador.Jogador.Nome,
                 Perguntas = MontaDadosViewModels(ranking)
             };
 
@@ -82,7 +85,9 @@ namespace TopGame.Web.Controllers
                 JogoId = jogo.JogoId,
                 JogadorId = rankingJogador.Jogador.JogadorId,
                 Jogador = rankingJogador.Jogador.Nome,
-                Posicao = posicao
+                Posicao = posicao,
+                PontoRanking = rankingJogador.PontoRanking,
+                PontoFortuna = rankingJogador.PontoFortuna
             };
 
             return View(model);

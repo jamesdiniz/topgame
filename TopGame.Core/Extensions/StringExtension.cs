@@ -10,14 +10,14 @@ namespace TopGame.Core.Extensions
         /// <summary>
         /// Criptografa uma string no formato SHA1
         /// </summary>
-        /// <param name="entrada">Entrada a ser formatada</param>
+        /// <param name="value">Valor a ser formatado</param>
         /// <returns>Retorna entrada criptografada</returns>
-        public static string ToHashed(this string entrada)
+        public static string ToHashed(this string value)
         {
-            var strBytes = Encoding.UTF8.GetBytes(entrada.ToLowerInvariant());
+            var bytes = Encoding.UTF8.GetBytes(value.ToLowerInvariant());
 
             return BitConverter
-                .ToString(new SHA1Managed().ComputeHash(strBytes))
+                .ToString(new SHA1Managed().ComputeHash(bytes))
                 .Replace("-", "")
                 .ToLowerInvariant();
         }
@@ -26,21 +26,21 @@ namespace TopGame.Core.Extensions
         /// Criar um token para o jogador no formato SHA1
         /// </summary>
         /// <param name="documento">Número do documento do jogador</param>
-        /// <param name="dataCadastro">Data de cadastro do jogador</param>
+        /// <param name="data">Data de cadastro do jogador</param>
         /// <returns>Retorna o token do jogador</returns>
-        public static string ConvertToToken(string documento, DateTime dataCadastro)
+        public static string ToToken(this string documento, DateTime data)
         {
-            return String.Concat(dataCadastro.Date.Ticks.ToString("x2"), LimpaCaracter(documento)).ToHashed();
+            return String.Concat(data.Date.Ticks.ToString("x2"), documento.RemoveNaoNumericos()).ToHashed();
         }
 
         /// <summary>
-        /// Limpa caracteres qua não forem digitos
+        /// Limpa caracteres qua não sejam numéricos
         /// </summary>
-        /// <param name="entrada">Entrada a ser formatada</param>
+        /// <param name="value">Valor a ser formatado</param>
         /// <returns>String sem caracteres</returns>
-        public static string LimpaCaracter(this string entrada)
+        public static string RemoveNaoNumericos(this string value)
         {
-            return Regex.Replace(entrada, @"\D+", String.Empty);
+            return Regex.Replace(value, @"\D+", String.Empty);
         }
     }
 }

@@ -18,9 +18,9 @@ namespace TopGame.Web.Controllers
         #region Fields
 
         private readonly IConfiguracaoService _configuracaoService;
-        private readonly JogoService _jogoService;
-        private readonly PerguntaService _perguntaService;
-        private readonly JogadorService _jogadorService;
+        private readonly IJogoService _jogoService;
+        private readonly IPerguntaService _perguntaService;
+        private readonly IJogadorService _jogadorService;
         private readonly IPontuacaoService _pontuacaoService;
         private readonly AppService _appService;
         
@@ -29,12 +29,15 @@ namespace TopGame.Web.Controllers
         #region Ctor
 
         public JogatinaController(IConfiguracaoService configuracaoService,
+            IJogoService jogoService,
+            IPerguntaService perguntaService,
+            IJogadorService jogadorService,
             IPontuacaoService pontuacaoService) 
         {
             _configuracaoService = configuracaoService;
-            _jogoService = new JogoService();
-            _perguntaService = new PerguntaService();
-            _jogadorService = new JogadorService();
+            _jogoService = jogoService;
+            _perguntaService = perguntaService;
+            _jogadorService = jogadorService;
             _pontuacaoService = pontuacaoService;
             _appService = new AppService();
         }
@@ -109,7 +112,6 @@ namespace TopGame.Web.Controllers
             try
             {
                 var jogadorToken = Autentica(jogadorId, token);
-                var jogador = _jogadorService.GetById(jogadorId);
 
                 foreach (var key in formCollection.AllKeys.Where(x => x.StartsWith("RSP|")))
                 {
@@ -215,7 +217,7 @@ namespace TopGame.Web.Controllers
         /// <returns></returns>
         private Pergunta ValidaPergunta(int jogoId, JogadorToken jogadorToken)
         {
-            var pergunta = _perguntaService.GetNaoRespondida(jogoId, jogadorToken.Codigo);
+            var pergunta = _perguntaService.GetByStatus(jogoId, jogadorToken.Codigo);
             if (pergunta != null) return pergunta;
 
             pergunta = _perguntaService.GetAleatoria(jogoId, jogadorToken.Codigo);
@@ -239,7 +241,7 @@ namespace TopGame.Web.Controllers
         private ConfiguracaoViewModel ValidaConfiguracao(int jogoId, JogadorToken jogadorToken)
         {
             var qtdPergunta = _configuracaoService.GetConfiguracao(jogoId).QuantidadePergunta;
-            var qtdRespondida = _perguntaService.CountTotalRespondida(jogoId, jogadorToken.Codigo);
+            var qtdRespondida = _perguntaService.CountByStatus(jogoId, jogadorToken.Codigo, "R");
             if (qtdRespondida >= qtdPergunta) throw new Exception("Você já respondeu todas as perguntas.<br />Obrigado por participar.<br /><br />Os resultados serão divulgados até o final do evento.<br /><a href=\"/Jogos/Bilionarios/356a192b7913b04c54574d18c28d46e6395428ab\" class=\"btn-reiniciar\">Reiniciar</a>");
 
             var configuracao = new ConfiguracaoViewModel
@@ -278,17 +280,5 @@ namespace TopGame.Web.Controllers
         }
 
         #endregion
-
-        [HttpPost]
-        public JsonResult Teste(string imageData)
-        {
-            using (var stream = new MemoryStream(Convert.FromBase64String(imageData)))
-            {
-                Image image = new Bitmap(stream);
-                image.Save(@"D:\Dev\teste.png");
-            }
-
-            return Json("");
-        }
     }
 }

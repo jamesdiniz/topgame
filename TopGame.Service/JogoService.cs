@@ -1,25 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using TopGame.Core.Data;
 using TopGame.Core.Domain;
-using TopGame.Core.Domain.Pontuacao;
 using TopGame.Core.Infrastructure;
-using TopGame.Data;
 
 namespace TopGame.Service
 {
-    public class JogoService : IJogoRepository
+    public class JogoService : IJogoService
     {
         #region Fields
 
-        private readonly JogoRepository _jogoRepository;
+        private readonly IRepository<Jogo> _jogoRepository;
 
         #endregion
 
         #region Ctor
 
-        public JogoService()
+        public JogoService(IRepository<Jogo> jogoRepository)
         {
-            _jogoRepository = new JogoRepository();
+            _jogoRepository = jogoRepository;
         }
 
         #endregion
@@ -29,20 +29,18 @@ namespace TopGame.Service
         public Jogo GetByToken(string token)
         {
             if (string.IsNullOrEmpty(token)) return null;
-            var jogo = _jogoRepository.GetByToken(token);
 
-            return jogo == null || !jogo.Ativo || (DateTime.Now < jogo.DataPublicacao || DateTime.Now > jogo.DataExpiracao) ? null : jogo;
+            var query = from j in _jogoRepository.Table
+                        where j.Token == token && j.Ativo && (j.DataPublicacao < DateTime.Now && j.DataExpiracao > DateTime.Now)
+                        select j;
+
+            var jogo = query.FirstOrDefault();
+            return jogo;
         }
 
         public IEnumerable<Premiacao> GetPremios(int id)
         {
-            return _jogoRepository.GetPremios(id);
-        }
-
-
-        public IEnumerable<PontuacaoApp> GetRanking(int id)
-        {
-            return _jogoRepository.GetRanking(id);
+            return _jogoRepository.Table.Where(x => x.JogoId == id).SelectMany(x => x.Premiacoes);
         }
 
         #endregion

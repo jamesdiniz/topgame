@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Linq;
+using TopGame.Core.Data;
 using TopGame.Core.Domain;
 using TopGame.Core.Extensions;
 using TopGame.Core.Infrastructure;
-using TopGame.Data;
 
 namespace TopGame.Service
 {
@@ -10,15 +11,18 @@ namespace TopGame.Service
     {
         #region Fields
 
-        private readonly JogadorRepository _jogadorRepository;
+        private readonly IRepository<Jogador> _jogadorRepository;
+        private readonly IRepository<JogadorToken> _jogadorTokenRepository;
 
         #endregion
 
         #region Ctor
 
-        public JogadorService()
+        public JogadorService(IRepository<Jogador> jogadorRepository,
+            IRepository<JogadorToken> jogadorTokenRepository)
         {
-            _jogadorRepository = new JogadorRepository();
+            _jogadorRepository = jogadorRepository;
+            _jogadorTokenRepository = jogadorTokenRepository;
         }
 
         #endregion
@@ -32,46 +36,58 @@ namespace TopGame.Service
 
         public Jogador GetByToken(string token)
         {
-            return _jogadorRepository.GetByToken(token);
+            var query = from j in _jogadorRepository.Table
+                        join tk in _jogadorTokenRepository.Table on j.JogadorId equals tk.JogadorId
+                        where tk.Codigo == token
+                        select j;
+
+            var jogador = query.FirstOrDefault();
+            return jogador;
         }
 
         public Jogador GetByDocumento(string documento)
         {
-            return _jogadorRepository.GetByDocumento(documento);
+            var query = from j in _jogadorRepository.Table
+                        where j.Documento == documento
+                        select j;
+
+            var jogador = query.FirstOrDefault();
+            return jogador;
         }
 
-        public Jogador Add(Jogador jogador)
+        public void AddJogador(Jogador jogador)
         {
-            jogador = _jogadorRepository.GetByDocumento(jogador.Documento) ??
-                    _jogadorRepository.Add(new Jogador
-                    {
-                        Nome = jogador.Nome,
-                        Email = jogador.Email,
-                        Documento = jogador.Documento,
-                        DataCriacao = DateTime.Now
-                    });
-
-            return jogador;
+            _jogadorRepository.Add(jogador);
         }
 
         public JogadorToken GetToken(int id, string token)
         {
-            return _jogadorRepository.GetToken(id, token);
+            var query = from t in _jogadorTokenRepository.Table
+                        where t.JogadorId == id && t.Codigo == token
+                        select t;
+
+            var jogadorToken = query.FirstOrDefault();
+            return jogadorToken;
         }
 
-        public JogadorToken CriaToken(Jogador jogador)
+        public JogadorToken AddToken(Jogador jogador)
         {
-            var jogadorToken = StringExtension.ConvertToToken(jogador.Documento, jogador.DataCriacao);
-            var token = _jogadorRepository.GetToken(jogador.JogadorId, jogadorToken) ??
-                _jogadorRepository.CriaToken(new JogadorToken
+            var token = jogador.Documento.ToToken(jogador.DataCriacao);
+            var jogadorToken = GetToken(jogador.JogadorId, token);
+
+            if (jogadorToken == null)
+            {
+                jogadorToken = new JogadorToken
                 {
                     JogadorId = jogador.JogadorId,
-                    Jogador = jogador,
-                    Codigo = jogadorToken,
+                    Codigo = token,
                     DataCriacao = DateTime.Now
-                });
+                };
 
-            return token;
+                _jogadorTokenRepository.Add(jogadorToken);
+            }
+
+            return jogadorToken;
         }
 
         #endregion

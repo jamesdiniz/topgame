@@ -7,7 +7,8 @@ namespace TopGame.Core.Infrastructure
         Jogador GetById(int id);
         Jogador GetByToken(string token);
         Jogador GetByDocumento(string documento);
-        Jogador Add(Jogador jogador);
+        void AddJogador(Jogador jogador);
         JogadorToken GetToken(int id, string token);
+        JogadorToken AddToken(Jogador jogador);
     }
 }

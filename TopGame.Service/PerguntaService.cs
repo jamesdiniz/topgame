@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using TopGame.Core.Data;
 using TopGame.Core.Domain;
-using TopGame.Core.Infrastructure;
-using TopGame.Data;
+using TopGame.Core.Infrastructure.Services;
 
 namespace TopGame.Service
 {

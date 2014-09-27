@@ -50,13 +50,12 @@
     <Compile Include="Domain\Premiacao.cs" />
     <Compile Include="Domain\TipoResposta.cs" />
     <Compile Include="Extensions\StringExtension.cs" />
-    <Compile Include="Helpers\Util.cs" />
-    <Compile Include="Infrastructure\IPerguntaService.cs" />
-    <Compile Include="Infrastructure\IPontuacaoService.cs" />
-    <Compile Include="Infrastructure\IConfiguracaoService.cs" />
-    <Compile Include="Infrastructure\IJogoService.cs" />
-    <Compile Include="Infrastructure\IJogadorService.cs" />
-    <Compile Include="Infrastructure\IPerguntaRepository.cs" />
+    <Compile Include="CommonHelper.cs" />
+    <Compile Include="Infrastructure\Services\IPerguntaService.cs" />
+    <Compile Include="Infrastructure\Services\IPontuacaoService.cs" />
+    <Compile Include="Infrastructure\Services\IConfiguracaoService.cs" />
+    <Compile Include="Infrastructure\Services\IJogoService.cs" />
+    <Compile Include="Infrastructure\Services\IJogadorService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

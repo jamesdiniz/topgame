@@ -5,8 +5,7 @@ using System.Web.Hosting;
 using System.Web.Mvc;
 using TopGame.Core.Domain;
 using TopGame.Core.Extensions;
-using TopGame.Core.Helpers;
-using TopGame.Core.Infrastructure;
+using TopGame.Core.Infrastructure.Services;
 using TopGame.Web.Models;
 
 namespace TopGame.Web.Controllers

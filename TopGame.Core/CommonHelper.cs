@@ -1,17 +1,16 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using TopGame.Core.Extensions;
 
-namespace TopGame.Core.Helpers
+namespace TopGame.Core
 {
-    public static class Util
+    public static class CommonHelper
     {
         /// <summary>
         /// Validação de CPF
         /// </summary>
         /// <param name="cpf">CPF a ser validado</param>
         /// <returns>Retorna se valor informado é válido</returns>
-        public static bool ValidaCpf(string cpf)
+        public static bool IsValidCpf(string cpf)
         {
             cpf = cpf.RemoveNaoNumericos();
 

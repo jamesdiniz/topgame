@@ -1,6 +1,6 @@
 ﻿using TopGame.Core.Data;
 using TopGame.Core.Domain.Pontuacao;
-using TopGame.Core.Infrastructure;
+using TopGame.Core.Infrastructure.Services;
 
 namespace TopGame.Service
 {

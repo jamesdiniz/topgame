@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 using System.Web.Mvc;
-using TopGame.Core.Helpers;
+using TopGame.Core;
 
 namespace TopGame.Web.Framework.Validator
 {
@@ -19,11 +18,11 @@ namespace TopGame.Web.Framework.Validator
             if (value == null || string.IsNullOrEmpty(value.ToString()))
                 return false;
 
-            return Regex.IsMatch(value.ToString(), @"^\d{3}\.?\d{3}\.?\d{3}\-?\d{2}$") && Util.ValidaCpf(value.ToString());
+            return Regex.IsMatch(value.ToString(), @"^\d{3}\.?\d{3}\.?\d{3}\-?\d{2}$") && CommonHelper.IsValidCpf(value.ToString());
         }
 
         /// <summary>
-        /// Validação client
+        /// Regras de validação no cliente
         /// </summary>
         /// <param name="metadata"></param>
         /// <param name="context"></param>
@@ -32,7 +31,7 @@ namespace TopGame.Web.Framework.Validator
         {
             yield return new ModelClientValidationRule
             {
-                ErrorMessage = this.FormatErrorMessage(null),
+                ErrorMessage = FormatErrorMessage(null),
                 ValidationType = "customvalidationcpf"
             };
         }

@@ -1,6 +1,6 @@
 ﻿using TopGame.Core.Domain.Pontuacao;
 
-namespace TopGame.Core.Infrastructure
+namespace TopGame.Core.Infrastructure.Services
 {
     public interface IPontuacaoService
     {

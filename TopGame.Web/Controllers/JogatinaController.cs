@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Web.Mvc;
 using TopGame.App.Bilionario.Service;
 using TopGame.Core.Domain;
 using TopGame.Core.Domain.Pontuacao;
-using TopGame.Core.Infrastructure;
-using TopGame.Service;
+using TopGame.Core.Infrastructure.Services;
 using TopGame.Web.Models;
 
 namespace TopGame.Web.Controllers

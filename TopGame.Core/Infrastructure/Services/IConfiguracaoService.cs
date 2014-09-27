@@ -1,6 +1,6 @@
 ﻿using TopGame.Core.Domain;
 
-namespace TopGame.Core.Infrastructure
+namespace TopGame.Core.Infrastructure.Services
 {
     public interface IConfiguracaoService
     {

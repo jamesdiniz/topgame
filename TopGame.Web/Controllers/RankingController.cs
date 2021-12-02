@@ -21,10 +21,10 @@ namespace TopGame.Web.Controllers
 
         #region Ctor
 
-        public RankingController(IJogoService jogoService)
+        public RankingController(IJogoService jogoService, AppService appService)
         {
             _jogoService = jogoService;
-            _appService = new AppService();
+            _appService = appService;
         }
 
         #endregion

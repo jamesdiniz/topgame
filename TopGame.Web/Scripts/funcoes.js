@@ -29,7 +29,7 @@
     if (d1 > 9) d1 = 0;
     if (dv.charAt(0) != d1) return false;
     d1 *= 2;
-    for (i = 0; i < 9; i++) d1 += c.charAt(i) * (11 - i)
+    for (i = 0; i < 9; i++) d1 += c.charAt(i) * (11 - i);
     d1 = 11 - (d1 % 11);
     if (d1 > 9) d1 = 0;
     if (dv.charAt(1) != d1) return false;

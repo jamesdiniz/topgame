@@ -29,14 +29,15 @@ namespace TopGame.Web.Controllers
             IJogoService jogoService,
             IPerguntaService perguntaService,
             IJogadorService jogadorService,
-            IPontuacaoService pontuacaoService) 
+            IPontuacaoService pontuacaoService,
+            AppService appService) 
         {
             _configuracaoService = configuracaoService;
             _jogoService = jogoService;
             _perguntaService = perguntaService;
             _jogadorService = jogadorService;
             _pontuacaoService = pontuacaoService;
-            _appService = new AppService();
+            _appService = appService;
         }
 
         #endregion
@@ -181,7 +182,7 @@ namespace TopGame.Web.Controllers
                     if (pontoPosicao < 0) pontoPosicao = pontoPosicao*-1;
                     if (pontoFortuna < 0) pontoFortuna = pontoFortuna*-1;
 
-                    _appService.IncluiPontuacao(pontoPosicao, pontoFortuna, jogadorResposta.PerguntaRespostaJogadorId, jogadorResposta.JogadorId);
+                    _appService.AddPontuacao(pontoPosicao, pontoFortuna, jogadorResposta.PerguntaRespostaJogadorId, jogadorResposta.JogadorId);
                 }
                     break;
             }

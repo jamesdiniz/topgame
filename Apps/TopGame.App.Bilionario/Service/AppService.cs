@@ -8,24 +8,24 @@ namespace TopGame.App.Bilionario.Service
     {
         #region Fields
 
-        private readonly AppRepository _appRepository;
+        private readonly IAppRepository _appRepository;
 
         #endregion
 
         #region Ctor
 
-        public AppService()
+        public AppService(IAppRepository appRepository)
         {
-            _appRepository = new AppRepository();
+            _appRepository = appRepository;
         }
 
         #endregion
 
         #region Methods
 
-        public void IncluiPontuacao(decimal pontoRanking, decimal pontoFortuna, int jogadorRespostaId, int jogadorId)
+        public void AddPontuacao(decimal pontoRanking, decimal pontoFortuna, int jogadorRespostaId, int jogadorId)
         {
-            _appRepository.IncluiPontuacao(pontoRanking, pontoFortuna, jogadorRespostaId, jogadorId);
+            _appRepository.AddPontuacao(pontoRanking, pontoFortuna, jogadorRespostaId, jogadorId);
         }
 
         public IEnumerable<PontuacaoAppBilionarios> GetRanking(int jogoId, bool? completo)

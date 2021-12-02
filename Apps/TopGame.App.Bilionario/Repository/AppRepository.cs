@@ -8,9 +8,9 @@ using TopGame.Core.Domain.Pontuacao;
 
 namespace TopGame.App.Bilionario.Repository
 {
-    public class AppRepository
+    public class AppRepository : IAppRepository
     {
-        public void IncluiPontuacao(decimal pontoRanking, decimal pontoFortuna, int jogadorRespostaId, int jogadorId)
+        public void AddPontuacao(decimal pontoRanking, decimal pontoFortuna, int jogadorRespostaId, int jogadorId)
         {
             const string query = "INSERT INTO PontuacaoAppBilionarios VALUES (@pontoRanking, @pontoFortuna, @jogadorRespostaId, @jogadorId)";
 
@@ -151,5 +151,14 @@ namespace TopGame.App.Bilionario.Repository
 
             return ranking;
         }
+    }
+
+    public interface IAppRepository
+    {
+        void AddPontuacao(decimal pontoRanking, decimal pontoFortuna, int jogadorRespostaId, int jogadorId);
+
+        IEnumerable<PontuacaoAppBilionarios> GetRanking(int jogoId, bool? completo);
+
+        IEnumerable<PontuacaoAppBilionarios> GetRankingDetalhes(int jogoId, int jogadorId);
     }
 }

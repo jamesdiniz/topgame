@@ -141,6 +141,11 @@ GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
 
+# Folders
+TopGame.Web/Images/Jogo/*
+TopGame.Web/Images/Jogador/*
+Docs
+
 # =========================
 # Windows detritus
 # =========================

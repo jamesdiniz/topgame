@@ -1,0 +1,86 @@
+﻿/**
+ *  Estilo
+ */
+
+body {
+    background-color: #E0ECEE;
+}
+
+header {
+    background-color: #003572;
+    color: #ffffff;
+}
+
+header img {
+    height: 35px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    padding: 10px 7px;
+}
+
+section#content p.descricao {
+    color: #2E84AA;
+}
+
+footer {
+    border-top-color: #003572;
+}
+
+input[type='text'] {
+    border-color: #A1C9DB;
+}
+
+
+/**
+ * Identificação
+ */
+
+
+#box-identificacao > h3 {
+    color: #003572;
+}
+
+#box-identificacao form label {
+    color: #2E84AA;
+}
+
+#box-identificacao .webcam {
+    border-color: #A1C9DB;
+    color: #A1C9DB;
+}
+
+
+/**
+ * Loader
+ */
+
+#loader-bg {
+    background-color: #000;
+}
+
+#loader {
+    background-color: #333333;
+    color: #ffffff;
+}
+
+/**
+ * Botões
+ */
+
+.btn-iniciar {
+    background-color: #003572;
+    color: #ffffff;
+}
+
+.btn-enviar {
+    background-color: #003572;
+    color: #ffffff;
+}
+
+/**
+ * Layout
+ */
+#box-respostas ul li {
+    background-color: #ffffff;
+    color: #009BDF;
+}

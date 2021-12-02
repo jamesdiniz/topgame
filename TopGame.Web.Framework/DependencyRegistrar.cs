@@ -1,19 +1,23 @@
-﻿using System.Reflection;
-using System.Web.Mvc;
+﻿using System.Linq;
 using Autofac;
 using Autofac.Integration.Mvc;
 using TopGame.Core.Data;
 using TopGame.Core.Infrastructure;
+using TopGame.Core.Infrastructure.DependencyManagement;
+using TopGame.Core.Infrastructure.Services;
 using TopGame.Data;
 using TopGame.Service;
 
 namespace TopGame.Web.Framework
 {
-    public static class DependencyRegistrar
+    public class DependencyRegistrar : IDependencyRegistrar
     {
-        public static void Register(ContainerBuilder builder, Assembly[] assemblies)
+        public void Register(ContainerBuilder builder, ITypeFinder typeFinder)
         {
-            builder.RegisterControllers(assemblies);
+            // controlllers
+            builder.RegisterControllers(typeFinder.GetAssemblies().ToArray());
+
+            // context and repository
             builder.Register<IDbContext>(c => new TopGameContext()).InstancePerLifetimeScope();
             builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>)).InstancePerLifetimeScope();
 
@@ -23,8 +27,6 @@ namespace TopGame.Web.Framework
             builder.RegisterType<JogadorService>().As<IJogadorService>().InstancePerLifetimeScope();
             builder.RegisterType<JogoService>().As<IJogoService>().InstancePerLifetimeScope();
             builder.RegisterType<PerguntaService>().As<IPerguntaService>().InstancePerLifetimeScope();
-
-            DependencyResolver.SetResolver(new AutofacDependencyResolver(builder.Build()));
         }
     }
 }
